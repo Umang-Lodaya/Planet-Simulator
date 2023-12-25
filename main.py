@@ -1,22 +1,31 @@
 import pygame
+import streamlit as st
+st.set_page_config(layout="wide")
+from pygame.locals import *
 from Planet import Planet
 
-pygame.init()
-pygame.display.set_caption("SOLAR SIMULATION")
+def main():
+    st.title("Planet Simulator")
+    st.header("")
+    placeholder = st.empty()
+    st.header("")
+    st.markdown(
+        "Made By in PyGame: Umang Kirit Lodaya [GitHub](https://github.com/Umang-Lodaya/Planet-Simulator) | [LinkedIn](https://www.linkedin.com/in/umang-lodaya-074496242/) | [Kaggle](https://www.kaggle.com/umanglodaya)"
+    )
 
-WIDTH, HEIGHT = 1500, 780
-GAME = pygame.display.set_mode((WIDTH, HEIGHT))
+    FPS = 60
 
-FPS = 60
-FONT = pygame.font.SysFont("comicsans", 16)
+    COLORS = {
+        "WHITE": (255, 255, 255),
+        "YELLOW": (255, 255, 0),
+        "BLACK": (0, 0, 0),
+    }
 
-COLORS = {
-    "WHITE": (255, 255, 255),
-    "YELLOW": (255, 255, 0),
-    "BLACK": (0, 0, 0),
-}
+    pygame.init()
+    pygame.display.set_caption("SOLAR SIMULATION")
 
-if __name__ == "__main__":
+    WIDTH, HEIGHT = 1500, 780
+    GAME = pygame.display.set_mode((WIDTH, HEIGHT))
 
     run = True
     clock = pygame.time.Clock() # TO SET AN UPPER BOUND ON FPS
@@ -45,6 +54,11 @@ if __name__ == "__main__":
             planet.updatePosition(PLANETS)
             planet.draw(GAME)
         
+        pygame.image.save(GAME, "pygame_frame.png")
+        placeholder.image("pygame_frame.png")
+        
         pygame.display.update()
-    
     pygame.quit()
+
+if __name__ == "__main__":
+    main()
